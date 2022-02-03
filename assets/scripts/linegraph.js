@@ -107,13 +107,25 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log(state)
 
     } )
-
+    let main = document.querySelector('#main-content')
+    let alert  = ` <div class="alert  fade show alert-success ml-auto mr-auto mt-5 fixed-top" role="alert" style = "width:200px; " id = 'forecastSuccess' >
+                        <span>Forecast Updated</span>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>`
 
     forecastForm.addEventListener('submit', async e => {
-        e.preventDefault()
 
+        e.preventDefault()
+        // alert.firstChild.innerText = 'Forecast Updated'
         $('#forecastModal').modal('hide')
         updateData(lineGraph)
+        main.insertAdjacentHTML('beforebegin', alert)
+        let forecastTimeout = setTimeout(() =>{
+            $('.alert').alert('close')
+        },3000).then(() =>
+        clearTimeout(forecastTimeout))
 
     })
 })
